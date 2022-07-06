@@ -94,30 +94,40 @@ public final class App {
             }
             // left is double quotes (start of word)
             if (keywords.charAt(left) == '“') {
+                boolean found = true;
                 while (keywords.charAt(right) != '”') {
                     if (right >= len) {
                         System.out.println("Did not find matching double quote!");
+                        found = false;
                         break;
                     }
                     right++; // increment pointer
                 } // ending quotes found
-                String sub = keywords.substring(++left, right); // (inclusive remove quote, exclusive]
-                maskable.add(sub);
-                left = ++right; // update left pointer
+                if (found) {
+                    String sub = keywords.substring(++left, right); // (inclusive remove quote, exclusive]
+                    maskable.add(sub);
+                    left = ++right;
+                }
+                left = right;
                 right++;
             }
             // left is single quotes (start of word)
             if (keywords.charAt(left) == '‘') {
+                boolean found = true;
                 while (keywords.charAt(right) != '’') {
                     if (right >= len) {
                         System.out.println("Did not find matching single quote!");
+                        found = false;
                         break;
                     }
                     right++; // increment pointer
                 } // ending quotes found
-                String sub = keywords.substring(++left, right); // (inclusive remove quote, exclusive]
-                maskable.add(sub);
-                left = ++right; // update left pointer
+                if (found) {
+                    String sub = keywords.substring(++left, right); // (inclusive remove quote, exclusive]
+                    maskable.add(sub);
+                    left = ++right; // update left pointer
+                }
+                left = right;
                 right++;
             }
             right++; // update right pointer

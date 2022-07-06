@@ -45,6 +45,21 @@ class AppTest {
         String test3 = null;
         Set<String> res3 = new HashSet<>();
         assertEquals(res3, App.createMaskableKeywords(test3));
+
+        // Test non matching double quotes
+        String test4 = "   ,,  Hello world “Boston Red Sox, ‘Pepperoni Pizza’, ‘Cheese Pizza’, beer, amigo enemy,  , , ,";
+        Set<String> res4 = new HashSet<>();
+        res4.add("world");
+        res4.add("Hello");
+        assertEquals(res4, App.createMaskableKeywords(test4));
+
+        // Test non matching single quotes
+        String test5 = "   ,,  Hello world “Boston Red Sox”, ‘Pepperoni Pizza,  beer, amigo enemy,  , , ,";
+        Set<String> res5 = new HashSet<>();
+        res5.add("Boston Red Sox");
+        res5.add("world");
+        res5.add("Hello");
+        assertEquals(res5, App.createMaskableKeywords(test5));
     }
 
     @Test
